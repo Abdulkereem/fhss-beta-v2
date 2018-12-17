@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="I am looking for programmers, search for spirit team you are one">
+  <meta name="author" content="Jaysa">
+  <title>FHSS</title>
+  <link href="../static/img/fhss-logo.png" rel="icon" type="image/png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="../static/css/@fontawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link type="text/css" href="../static/css/argon.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/css/custom_dashboard.css">
+</head>
+
+<body>
+  <div class="main-content">
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <a href="javascript:void(0)" class="pl-sm-1">
+          <img src="../static/img/brand/white.png" class="cbrand" alt="FHSS">
+        </a>
+        <a class="nav-link pr-0" href="javascript:void(0)" data-toggle="modal" data-target=".menu_modal">
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle fa fa-building">
+            </span>
+            <div class="media-body ml-2 d-lg-block pr-sm-1">
+              <span class="navbar-toggler-icon"></span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 450px; background-image: url(../static/img/theme/profile-cover.png); background-size: cover;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-7"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+          <div class="col-lg-12 col-md-12 centralise">
+            <h2 class="text-white">Welcome to Health Management Organisation under Federal Health service system, Here blah blah blah and blah happens</h2>
+          </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="col-xl-12">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Basic Table:</h3>
+              </div>
+              <table id="myTable" class="table">
+                <thead>
+                  <tr>
+                    <th>HOSPTAL NAME</th>
+                    <th title="Medical Record Number">Registration Number</th>
+                    <th>Tax id</th>
+                    <th>RC Number</th>
+                    <th>Account Status</th>
+                    <th>View</th>
+                  </tr>
+                </thead>
+              {% for users in user %}
+                    {% if users.hospital_name == None %}
+                           {% else %}
+
+                <tbody>
+                  <tr>
+                    <td>{{users.hospital_name}}</td>
+                    <td>{{users.medical_regno}}</td>
+                    <td>{{users.tax_id}}</td>
+                    <td>{{users.rc_number}}</td>
+                    {% if users.block==True %}
+                    <td style="color:red;">suspended</td>
+                    {% else %}
+                    <td style="color:blue;">Active</td>
+                    {% endif %}
+                    <td>
+                      <div class="text-center"><a href="{{url_for('hmos.hprofile',id=users.id)}}" class="btn btn-primary">View Profile</a></div>
+
+                    </td>
+                  </tr>
+                </tbody>
+              {% endif %}
+                {% endfor %}
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer p-3">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; 2018 <a href="javascript:void(0)" class="font-weight-bold ml-1" target="_blank">SpritTeam</a>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link" target="_blank">Fhss</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+  <div class="modal fade logsout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content padding-50 modal-logout">
+        <p class="centralise">
+          Are you sure you want to <span style="color: tomato"><i class="fa fa-sign-out"></i>Logout?</span>
+        </p>
+        <div class="row">
+          <a href="/logout" class="btn btn-primary col-md-5 mr-4 col-sm-5">Yes</a>
+          <button class="btn btn-secondary col-md-5 ml-4 col-sm-5" data-dismiss="modal" aria-label="Close">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade menu_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Submenu:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="dropdown-header noti-title p-0 m-0 w-100">
+            <a href="javascript:void(0)" class="dropdown-item">
+              <i class="ni ni-support-16" style="font-size: 10pt !important"></i>
+              <span  style="font-size: 12pt !important">&nbsp; Claim Payments</span>
+            </a>
+            <a href="javascript:void(0)" class="dropdown-item">
+              <i class="ni ni-building" style="font-size: 10pt !important"></i>
+              <span  style="font-size: 12pt !important">&nbsp; View Claimed Payments</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="javascript:void(0)" class="dropdown-item" data-dismiss="modal" data-toggle="modal" data-target=".logsout">
+              <i class="ni ni-user-run" style="font-size: 10pt !important"></i>
+              <span  style="font-size: 12pt !important">&nbsp; Logout</span>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+  <!-- <script language="Javascript" type="text/javascript">
+    $(document).ready(function () {
+      oTable = $('#myTable').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+      $('#myInputTextField').keyup(function () {
+        oTable.search($(this).val()).draw();
+      })
+
+    });
+  </script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="../static/js/jquery/dist/jquery.min.js"></script>
+  <script src="../static/js/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/argon.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="I am looking for programmers, search for spirit team you are one">
+  <meta name="author" content="Jaysa">
+  <title>FHSS</title>
+  <link href="../static/img/fhss-logo.png" rel="icon" type="image/png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="../static/css/@fontawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link type="text/css" href="../static/css/argon.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/css/custom_dashboard.css">
+</head>
+
+<body>
+  <div class="main-content">
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <a href="javascript:void(0)" class="pl-sm-1">
+          <img src="{{url_for('static',filename='img/brand/white.png')}}" class="cbrand" alt="FHSS">
+        </a>
+        <a class="nav-link pr-0" href="javascript:void(0)" data-toggle="modal" data-target=".menu_modal">
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle fa fa-building">
+            </span>
+            <div class="media-body ml-2 d-lg-block pr-sm-1 text-white"  data-dismiss="modal" data-toggle="modal" data-target=".logsout">
+              Logout
+            </div>
+          </div>
+        </a>
+      </div>
+    </nav>
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(../static/img/theme/profile-cover.png); background-size: cover;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-7"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+          <div class="col-lg-12 col-md-12 centralise">
+          <form method="POST" action="/hcpmain">
+              <div class="form-row centralise">
+                <div class="col-md-12 input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search" style="color: blue"></i></span>
+                  </div>
+                  <input type="search" name="fhssid" class="form-control" placeholder="Enter FHSS ID" required="yes">
+                </div>
+                <div class="mt-3 w-100">
+                  <input type="submit" class="form-control btn-primary btn cw-50" value="Search Record">
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="col-xl-12">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Search Result:</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body ch-50">
+            {% if user == None %}
+              <h2 class="ch-align">Sorry no query results available</h2>
+            {% else %}
+          <table id="myTable" class="table">
+            <thead>
+              <tr>
+                <th>FHSS ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+           
+
+            <tbody>
+              <tr>
+              <td>{{user.fhss}}</td>
+              <td>{{user.first_name}}</td>
+              <td>{{user.last_name}}</td>
+              <td>
+                <div><a href="{{url_for('hcp.eprofile',id=user.id)}}" class="btn btn-primary">View</a></div>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer p-3">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; 2018 <a href="javascript:void(0)" class="font-weight-bold ml-1" target="_blank">SpritTeam</a>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link" target="_blank">Fhss</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+<div class="modal fade logsout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content padding-50 modal-logout">
+      <p class="centralise">
+        Are you sure you want to <span style="color: tomato"><i class="fa fa-sign-out"></i>Logout?</span>
+      </p>
+      <div class="row">
+        <a href="/logout" class="btn btn-primary col-md-5 mr-4 col-sm-5">Yes</a>
+        <button class="btn btn-secondary col-md-5 ml-4 col-sm-5" data-dismiss="modal" aria-label="Close">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade menu_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Submenu:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="dropdown-header noti-title p-0 m-0 w-100">
+          <a href="javascript:void(0)" class="dropdown-item">
+            <i class="ni ni-support-16" style="font-size: 10pt !important"></i>
+            <span style="font-size: 12pt !important">&nbsp; Claim Payments</span>
+          </a>
+          <a href="javascript:void(0)" class="dropdown-item">
+            <i class="ni ni-building" style="font-size: 10pt !important"></i>
+            <span style="font-size: 12pt !important">&nbsp; View Claimed Payments</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="javascript:void(0)" class="dropdown-item" data-dismiss="modal" data-toggle="modal" data-target=".logsout">
+            <i class="ni ni-user-run" style="font-size: 10pt !important"></i>
+            <span style="font-size: 12pt !important">&nbsp; Logout</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../static/js/jquery/dist/jquery.min.js"></script>
+  <script src="../static/js/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/argon.js"></script>
+</body>
+</html>

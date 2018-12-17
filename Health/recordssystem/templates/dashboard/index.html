@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="I am looking for programmers, search for spirit team you are one">
+  <meta name="author" content="Jaysa">
+  <title>FHSS</title>
+  <link href="../static/img/fhss-logo.png" rel="icon" type="image/png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="../static/css/@fontawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link type="text/css" href="../static/css/argon.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/css/custom_dashboard.css">
+</head>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<script>
+  var messages = {
+    {
+      messages | safe
+    }
+  };
+  for (var i = 0; i < messages.length; i++) {
+    alert(messages[i]);
+  }
+</script>
+{% endif %}
+{% endwith %}
+
+<body>
+  <div class="main-content">
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <a href="javascript:void(0)" class="pl-sm-1">
+          <img src="../static/img/brand/white.png" class="cbrand" alt="FHSS">
+        </a>
+        <ul class="navbar-nav align-items-center d-md-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="javascript:void(0)" data-toggle="modal" data-target=".logsout">
+              <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="../static/img/unknown.jpg" >
+                </span>
+                <div class="media-body ml-2 d-lg-block pr-sm-1">
+                  <span class="mb-0 text-sm  font-weight-bold text-white">Logout</span>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(../static/img/theme/profile-cover.png); background-size: cover;">
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white">Hello {{current_user.username}}</h1>
+            <p class="text-white mt-0 mb-5">This is your profile page. Here you can register up to four of your spouse and please take note of your FHSS ID</p>
+            {% include './auth/flash.html' %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-4 mb-5 mb-xl-0">
+          <div class="card card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a href="javascript:void(0)">
+                    <img src="{{current_user.passport}}" class="rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"></div>
+            <div class="card-body pt-0 pt-md-4">
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                    <p>Account Type: </p>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h3>
+                  User's name
+                </h3>
+                <div>
+                  <i class="ni education_hat mr-2"></i> dept:{{current_user.sector}}
+                </div>
+                <div class="h5 mt-4">
+                  <i class="ni business_briefcase-24 mr-2"></i> sector:
+                </div>
+                <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i> {{current_user.sector_type}}
+                </div>
+
+                <div class="h5 mt-4">
+                  <i class="ni business_briefcase-24 mr-2"></i> FHSS ID:
+                </div>
+                <div class="h5 font-weight-300">
+                </div>
+
+                 <div class="h5 font-weight-300">
+                    <i class="ni location_pin mr-2"></i> {{current_user.fhss}}
+                </div>
+                <div class="h5 font-weight-300">
+                    <a href="{{url_for('dashboard.hist')}}" class="btn form-control btn-primary btn-lg  ">View Medical Histories</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-8">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Create Spouse Account</h3>
+                  {{ relatives.len }}
+                </div>
+                <div class="col-4 text-right">
+                  <a href="javascript:void(0)" class="btn btn-sm btn-primary" style="font-size: 13pt" data-toggle="modal" data-target="#modal-form"><i class="fa fa-plus"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body ch-50">
+              {%  if relatives.length == 0 %}
+              <h2 class="ch-align">You have not registered any Spouse yet</h2>
+              {% else %}
+              <div class="row centralise" id="spouse_log">
+                {% for families in relatives %}
+                <div class="col-md-3 card card-stats mb-4 mb-lg-0">
+                  <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0 mt-3">Spouse Data</h5>
+                            <img class="mb-2" src="{{families.passport}}" alt="spouse picture" height="150" width="150">
+                        </div>
+                        <div class="col-auto ml--2">
+                          <div class="mb-3">
+                                <i class="fa fa-user" style="color: blue"></i>&nbsp; Fullname
+                                <div class="col-md-12">
+                                  {{families.first_name}}&nbsp; {{families.last_name}}
+                                </div>
+                          </div>
+                          <div class="mb-2">
+                            <i class="fa fa-transgender" style="color: blue"></i>&nbsp; Gender
+                            <div class="col-md-12">
+                              {{families.gender}}
+                            </div>
+                          </div>
+                          <div class="mb-2">
+                            <i class="fa fa-tint" style="color: red"></i>&nbsp; blood group
+                          </div>
+                          <div class="mb-2">
+                            <i class="fa fa-calendar" style="color: skyblue"></i>&nbsp; Date of birth
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {% endfor %}
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer p-3">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; 2018 <a href="javascript:void(0)" class="font-weight-bold ml-1" target="_blank">SpritTeam</a>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+          <li class="nav-item">
+            <a href="javascript:void(0)" class="nav-link" target="_blank">Fhss</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+  <div class="modal fade logsout" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content padding-50 modal-logout">
+        <p class="centralise">
+          Are you sure you want to <span style="color: tomato"><i class="fa fa-sign-out"></i>Logout?</span>
+        </p>
+        <div class="row">
+          <a href="/logout" class="btn btn-primary col-md-5 mr-4 col-sm-5">Yes</a>
+          <button class="btn btn-secondary col-md-5 ml-4 col-sm-5" data-dismiss="modal" aria-label="Close">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog modal-md  " role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-3 centralise">
+              Please enter Spouse's information to their respective fields
+            </div>
+            <form method="POST" role="form" action="{{url_for('dashboard.processor')}}" enctype="multipart/form-data" id="dash_form">
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-file" style="color: brown"></i></span>
+                  </div>
+                  <div class="custom-file mt-0">
+                    <input name="passport" class="input-fields custom-file-input" type="file" id="file_handler" required="yes" style="opacity: 0;" accept=".jpeg, .jpg, .png, image/png, image/jpeg">
+                    <label id="file_label" class="custom-file-label" style="border: none; font-size: 10pt; padding-top: 15px; padding-left: 0">Upload Passport</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-user" style="color: gold"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="First Name" type="text" name="fname" required="yes">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-user" style="color: yellow"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="Middle Name" type="text" name="mname" required="yes">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-user" style="color: orange"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="Last Name" type="text" name="lname" required="yes">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar" style="color: skyblue"></i></span>
+                  </div>
+                  <input class="form-control" placeholder="Date of birth" type="text" id="date_place" required="yes">
+                  <input class="form-control" type="date" name="DoB" style="display: none" id="date_land" required="yes">
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-transgender" style="color: blue"></i></span>
+                  </div>
+                  <input type="text" placeholder="Gender" class="form-control" id="gender_place" required="yes">
+                  <select name="Gender" class="form-control" required="yes" style="display: none" id="gender_land" required="yes">
+                    <option value="">Click to choose</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-tint" style="color: red"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Blood Group" id="blood_place" required="yes">
+                  <select name="Blood_group" class="form-control" required="yes" style="display: none" id="blood_land" required="yes">
+                    <option value="">Click to choose</option>
+                    <option value="O-">O-</option>
+                    <option value="O+">O+</option>
+                    <option value="A-">A-</option>
+                    <option value="A+">A+</option>
+                    <option value="B-">B-</option>
+                    <option value="B+">B+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="AB+">AB+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <input type="submit" value="Register Spouse" class="btn btn-primary my-4">
+                <button type="button" class="btn btn-danger my-4" data-dismiss="modal" aria-label="Close">quit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../static/js/jquery/dist/jquery.min.js"></script>
+  <script src="../static/js/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/argon.js"></script>
+  <script src="../static/js/script_dashboard.js"></script>
+</body>
+
+</html>

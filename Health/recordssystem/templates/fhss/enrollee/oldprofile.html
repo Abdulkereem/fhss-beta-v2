@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Profile | Klorofil - Free Bootstrap Dashboard Template</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="{{url_for('static', filename='HCP/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='HCP/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='HCP/assets/vendor/linearicons/style.css')}}">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="{{url_for('static',filename='HCP/assets/css/main.css')}}">
+	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+</head>
+
+<body>
+
+<script>
+
+	/* Trigger flash modal */
+		$(document).ready(function () {
+			var messages = "{{ get_flashed_messages() }}";
+
+			if (typeof messages != 'undefined' && messages != '[]') {
+				$("#myModal").modal();
+			};
+		});
+</script>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+		
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Modal Header</h4>
+					</div>
+					<div class="modal-body">
+						{% with messages = get_flashed_messages() %}
+						{% if messages %}
+						<ul class=flashes>
+							{% for message in messages %}
+							<li>{{ message }}</li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+						{% endwith %}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+		
+			</div>
+		</div>
+		<!-- NAVBAR -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="brand">
+			<a href="#">
+				<img style="width:100px; height:50px;" src="{{url_for('static',filename='HCP/assets/img/logo-dark.png')}}" alt="">
+			</a>
+		</div>
+		<div class="container-fluid">
+			<div class="navbar-btn">
+				<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+			</div>
+	
+	
+	</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<br><br>
+						<li><a href="{{url_for('fhss.fmain')}}"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="{{url_for('fhss.fhenrol')}}"><i class="lnr lnr-linearicons"></i> <span>View all enrollee</span></a></li>
+						<li><a href="{{url_for('fhss.fhcp')}}"><i class="lnr lnr-linearicons"></i> <span>View all HCP</span></a></li>
+						<li><a href="{{url_for('fhss.fmain')}}"><i class="lnr lnr-linearicons"></i> <span>View all HMO</span></a></li>
+		
+		
+						<li><a href="/logout" class=""><i class="lnr lnr-code"></i> <span>logout</span></a></li>
+		
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<div class="panel panel-profile">
+						<div class="clearfix">
+							<!-- LEFT COLUMN -->
+							<div>
+								<!-- PROFILE HEADER -->
+								<div class="profile-header">
+									<div class="overlay"></div>
+									<div class="profile-main">
+										<img style="width:100px;" src="{{user.passport}}" class="img-circle" alt="Avatar">
+										
+										<span class="online-status status-available">Available</span>
+									</div>
+									<div class="profile-stat">
+										<div class="row">
+					
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- END PROFILE HEADER -->
+								<!-- PROFILE DETAIL -->
+								<div class="profile-detail">
+									<div class="profile-info">
+										<h4 class="heading">Basic Info</h4>
+										<ul class="list-unstyled list-justify">
+											<li>FHSS <span>{{user.fhss}}</span></li>
+											<li>Nin <span>{{user.nin}}</span></li>
+											<li>First Name <span>{{user.first_name}}</span></li>
+											<li>Middle Name <span>{{user.middle_name}}</span></li>
+											<li>Last Name <span>{{user.last_name}}</span></li>
+											<li>Gender <span>{{user.gender}}</span></li>
+											<li>Blood Group <span>{{user.blood_group}}</span></li>
+											<li>Marital Status <span>{{user.marital_status}}</span></li>
+											<li>Birthdate <span>{{user.dob}}</span></li>
+											<li>Mobile <span>{{user.phone}}</span></li>
+											<li>Email <span>{{user.email}}</span></li>
+											<form action="">
+												<li>Suspend <span><input  name="suspend" type="checkbox"></span></li>
+
+											
+										</ul>
+									</div>
+									<input type="submit" class="container btn btn-primary" value="Update">
+									</form>
+								</div>
+								<!-- END PROFILE DETAIL -->
+							</div>
+							<!-- END LEFT COLUMN -->
+							<!-- RIGHT COLUMN -->
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script src="{{url_for('static',filename='HCP/assets/vendor/jquery/jquery.min.js')}}"></script>
+	<script src="{{url_for('static',filename='HCP/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{url_for('static',filename='HCP/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+	<script src="{{url_for('static',filename='HCP/assets/scripts/klorofil-common.js')}}}"></script>
+</body>
+
+</html>

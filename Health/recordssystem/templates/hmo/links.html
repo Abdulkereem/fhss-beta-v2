@@ -1,0 +1,41 @@
+<title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="{{url_for('static',filename='HCP/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='HCP/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='HCP/assets/vendor/linearicons/style.css')}}">
+	<link rel="stylesheet" href="{{url_for('static',filename='HCP/assets/vendor/chartist/css/chartist-custom.css')}}">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="{{url_for('static',filename='HCP/assets/css/main.css')}}">
+	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="{{url_for('static',filename='HCP/assets/img/apple-icon.png')}}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{{url_for('static',filename='HCP/assets/img/FHSS-Logo.png')}}">
+	<!-- Javascript -->
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+	<script language="Javascript" type="text/javascript">
+		$(document).ready(function () {
+			oTable = $('#myTable').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+			$('#myInputTextField').keyup(function () {
+				oTable.search($(this).val()).draw();
+			})
+			
+		});
+	</script>
+	
+	
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+	<script src="{{url_for('static',filename='HCP/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{url_for('static',filename='HCP/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+	<script src="{{url_for('static',filename='HCP/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js')}}"></script>
+	<script src="{{url_for('static',filename='HCP/assets/vendor/chartist/js/chartist.min.js')}}"></script>
+	<script src="{{url_for('static',filename='HCP/assets/scripts/klorofil-common.js')}}"></script>
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">

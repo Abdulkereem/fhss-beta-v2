@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>FHSS</title>
+  <link href="../static/img/fhss-logo.png" rel="icon" type="image/png">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="../static/css/@fontawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link type="text/css" href="../static/css/argon.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+  <link href="../static/css/nucleo/css/nucleo.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white nav-md" id="sidenav-main">
+    <div class="container-fluid">
+      <a class="brand pt-0" href="javascript:void(0)">
+        <img src="{{url_for('static',filename='img/brand/blue.png')}}" class="navbar-brand-img " alt="FHSS">
+      </a>
+      <ul class="navbar-nav align-items-center d-md-none">
+        <li class="nav-item dropdown">
+          <a class="nav-link pr-0" href="javascript:void(0)" data-toggle="modal" data-target=".login_modal">
+            <div class="media align-items-center">
+              <span class="mb-0 text-sm  font-weight-bold dark-text">Login</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav align-items-center d-md-none">
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="media align-items-center">
+              <span class="dark-text mb-0 text-sm  font-weight-bold">Registrations</span>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+            <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Register As:</h6>
+              </div>
+              <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target=".hcp-log">
+                <i class="ni ni-support-16"></i>
+                <span>HCP</span>
+              </a>
+              <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target=".hmo-log">
+                <i class="ni ni-building"></i>
+                <span>HMO</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0)" class="dropdown-item"  data-toggle="modal" data-target=".new-log">
+                <i class="ni ni-single-02"></i>
+                <span>New User</span>
+              </a>
+          </div>
+        </li>
+      </ul>
+      <div class="collapse navbar-collapse sidebar mt-3" id="sidenav-collapse-main"></div>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(../static/img/theme/profile-cover.png); background-size: cover; background-position: right">
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+        <div class="container-fluid">
+          <h1 class="h4 mb-0 text-white text-uppercase cd-none d-lg-inline-block">FEDERAL HEALTH SERVICES SYSTEM</h1>
+          <ul class="navbar-nav align-items-center cd-none d-md-flex">
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="javascript:void(0)" data-toggle="modal" data-target=".login_modal">
+                <div class="media align-items-center">
+                  <div class="media-body ml-2 cd-none d-lg-block">
+                    <span class="mb-0 text-sm  font-weight-bold">Login</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="javascript:void(0)" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="media align-items-center">
+                  <div class="media-body ml-2 cd-none d-lg-block">
+                    <span class="mb-0 text-sm  font-weight-bold">Registrations</span>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                <div class=" dropdown-header noti-title">
+                  <h6 class="text-overflow m-0">Welcome!</h6>
+                </div>
+                <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target=".hcp-log">
+                  <i class="ni ni-support-16"></i>
+                  <span>HCP</span>
+                </a>
+                <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target=".hmo-log">
+                  <i class="ni ni-building"></i>
+                  <span>HMO</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="javascript:void(0)" class="dropdown-item"  data-toggle="modal" data-target=".new-log">
+                  <i class="ni ni-single-02"></i>
+                  <span>New User</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+        <div class="header-body">
+            <div class="logo col-md-12">
+              <img src="../static/img/FHSS-Logo.png" style="opacity: 0.6">
+              {% include './auth/flash.html' %}
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+          <div class="card bg-gradient-default shadow">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="row">
+
+                  <div class="col-xl-3 col-lg-6 centralise">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                      <div class="card-body">
+                        <div class="img-holder">
+                            <a href="javascript:void(0)">
+                                <img src="../static/img/stage-1-active.svg" alt="Provide your Basic Details">
+                            </a>
+                        </div>
+                        <div>
+                            <h5 title="Health Management Organisation">HMO</h5>
+                            <small>Provide us with your Establishment Information</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-6 centralise">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                      <div class="card-body">
+                        <div class="img-holder">
+                            <a href="javascript:void(0)">
+                                <img src="../static/img/stage-1.svg" alt="Provide your Basic Details">
+                            </a>
+                        </div>
+                        <div>
+                            <h5>Provide your Basic Details</h5>
+                            <small>Provide us with information to set up your account</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-6 centralise">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                      <div class="card-body">
+                        <div class="img-holder">
+                            <a href="javascript:void(0)">
+                                <img src="../static/img/stage-2.svg" alt="Verify your Mobile Number">
+                            </a>
+                        </div>
+                        <div >
+                            <h5>Verify your Mobile Number</h5>
+                            <small>Verify the supplied mobile phone number</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3 col-lg-6 centralise">
+                    <div class="card card-stats mb-4 mb-xl-0">
+                      <div class="card-body">
+                        <div class="img-holder">
+                            <a href="javascript:void(0)">
+                                <img src="../static/img/stage-3.svg" alt="Tell us about your Company">
+                            </a>
+                        </div>
+                        <div>
+                            <h5>Health Care Provider</h5>
+                            <small>Information about your Health Care Provider</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p class="padding">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+          <div class="col-xl-6">
+            <div class="copyright text-center text-xl-left text-muted">
+              &copy; 2018 <a href="javascript:void(0)" class="font-weight-bold ml-1" target="_blank">FHSS</a>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+              <li class="nav-item">
+                <a href="javascript:void(0)" class="nav-link" target="_blank">About Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal fade login_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Login:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="form_login" method="POST" action="/signin">
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label>Username or Email</label>
+                <input type="text" class="form-control" placeholder="Username or Email" required="yes" name="username">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" required="yes" name="password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <a href="javascript:void(0)">forgotten password?</a>
+              </div>
+              <div class="col-md-6 col-sm-6 tmt-sm-3">
+                <a href="javascript:void(0)" data-toggle="modal" data-target=".pflogin_modal" data-dismiss="modal"><i class="fa fa-id-badge"></i> Login with PF-Number</a>
+              </div>
+            </div>
+            <div style="display: none">
+              <button id="log_btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="col-sm-10 my-1 login_btn">
+            <button class="btn btn-primary" onclick="clicker_func('log_btn')">Login</button>
+          </div>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade pflogin_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Enter PF-Number to Login:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="form_login" action="/signin">
+            <div class="col-md-12 mb-3 centralise">
+              <label>PF Number</label>
+              <input type="text" class="form-control" placeholder="PF-Number" required="yes" name="pflog">
+            </div>
+            <div style="display: none">
+              <button id="pflog_btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="col-sm-8 my-1 login_btn">
+            <button class="col-md-5 col-sm-5 mr-5 btn btn-primary" onclick="clicker_func('pflog_btn')">Login</button>
+          </div>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade new-log" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xlg modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">User Registration: <span>please select a mode</span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body mb-bt pt-1">
+        <form class="pt-0" method="POST" action="{{url_for('login.signup')}}" enctype="multipart/form-data" id="form_index">
+            <div class="form-row mt-0">
+              <div class="col-md-5 col-sm-5 centralise custom-button white-text mrc-4 btn-c" id="formal_tab">
+                <label>Formal</label>
+                <input type="radio" class="custom-radio center-v cloak" required="yes" value="Formal" name="sector" id="formal">
+              </div>
+              <div class="col-md-5 col-sm-5 centralise custom-button white-text mlc-4 btn-c" id="informal_tab">
+                <label>Informal</label>
+                <input type="radio" class="custom-radio center-v cloak" required="yes" value="Informal" name="sector" id="informal">
+              </div>
+            </div>
+            <hr class="mt-1 mb-2" id="secr" style="display: none">
+            <div class="form-row mt-0" id="formal_sector"></div>
+            <hr class="mt-1 mb-2">
+            <div class="form-row" id="form_block"></div>
+            <hr class="mt-1" style="display: none" id="hr_show">
+            <div class="form-row">
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Firstname</label>
+                <input type="text" class="form-control" name="fname" placeholder="Firstname" required="yes">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Surname</label>
+                <input type="text" class="form-control" name="lname" placeholder="Surname" required="yes">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Middlename</label>
+                <input type="text" class="form-control" name="mname" placeholder="Middlename" required="yes">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Username</label>
+                <input type="text" class="form-control" name="username" placeholder="username" required="yes">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5 pad-r">
+                <label>Sex</label>
+                <select name="gender" class="form-control" required="yes">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5 pad-r">
+                <label>Marital status</label>
+                <select name="marital_status" class="form-control" required="yes">
+                  <option value="Married">Married</option>
+                  <option value="Single">Single</option>
+                  <option value="Devorced">Devorced</option>
+                </select>
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Date of Birth</label>
+                <input type="date" class="form-control" required="yes" name="DoB">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5 pad-r">
+                <label>Blood Group</label>
+                <select name="Blood_group" class="form-control" required="yes">
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="AB+">AB+</option>
+                </select>
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Phone Number</label>
+              <input type="text" class="form-control" placeholder="Phone Number" required="yes" maxlength="14" id="phone_number" name="phone_number">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email" required="yes" name="email">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label title="National Identification Number">NIN</label>
+                <input type="text" class="form-control" placeholder="National Identity Number" required="yes" title="National Identity Number" name="nin">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label title="Personal File Number">Upload Passport</label>
+                <div class="custom-file mt-0">
+                  <input name="passport" class="input-fields custom-file-input" type="file" id="file_handler" required="yes" style="opacity: 0;" accept=".jpeg, .jpg, .png, image/png, image/jpeg">
+                  <label id="file_label" class="custom-file-label">Upload Passport</label>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5" id="pf_number" style="display: none !important"></div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" required="yes" id="pass_index" name="password">
+              </div>
+              <div class="col-md-3 mb-3 col-cmd-5">
+                <label>Password Confirmation</label>
+                <input type="password" class="form-control" placeholder="Password" required="yes" id="cpass_index">
+              </div>
+            </div>
+            <div style="display: none">
+              <button id="submit_btn" type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="col-sm-10 my-1">
+            <button class="btn btn-primary w-50" onclick="clicker_func('submit_btn')">Register</button>
+          </div>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade hcp-log" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xlg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">HCP Registration:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mb-bt pt-1">
+        <form class="pt-0" method="POST" action="{{url_for('login.create')}}" enctype="multipart/form-data" id="form_hcp">
+            <div class="form-row">
+              <div class="col-md-4 mb-4">
+                <label>Hospital Name</label>
+                <input type="text" class="form-control" placeholder="Hospital Name" required="yes" name="hsp">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Username</label>
+                <input type="text" class="form-control" placeholder="Username" required="yes" name="username">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Address</label>
+                <input type="text" class="form-control" placeholder="Address" required="yes" name="address">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Medical Council Record</label>
+                <input type="text" class="form-control" placeholder="Medical Council Record" required="yes" name="medic">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Rc Number</label>
+                <input type="text" class="form-control" placeholder="Rc Number" required="yes" name="rc">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Tax Identification Number</label>
+                <input type="text" class="form-control" placeholder="Tax Identification Number" required="yes" name="tx">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email" required="yes" name="email">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" required="yes" id="pass_hcp" name="password">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Password Confirmation</label>
+                <input type="password" class="form-control" placeholder="Password" required="yes" id="cpass_hcp">
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <label>Select HMO</label>
+                <select form-control name="hmo" id="">
+                      {% for hmos in hmos_list %}
+                        <option>{{hmos.organ}}</option>
+                      {% endfor %}  
+                </select>
+              </div>
+            </div>
+            <div style="display: none">
+              <button id="submit_btn1" type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="col-sm-10 my-1">
+            <button class="btn btn-primary w-50" onclick="clicker_func('submit_btn1')">Register</button>
+          </div>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade hmo-log" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xlg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">HMO Registration:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mb-bt pt-1">
+          <form class="pt-0" method="POST" action="{{url_for('login.hmosignup')}}" id="form_hmo">
+            <div class="form-row">
+              <div class="col-md-4 mb-4">
+                <label>Name of Organisation</label>
+                <input type="text" class="form-control" placeholder="Name of Organisation" required="yes" name="orgname">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Username</label>
+                <input type="text" class="form-control" placeholder="Username" required="yes" name="username">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Email</label>
+                <input type="text" class="form-control" placeholder="Email" required="yes" name="email">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Address</label>
+                <input type="text" class="form-control" placeholder="Address" required="yes" name="addrs">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" required="yes" id="pass_hmo" name="password">
+              </div>
+              <div class="col-md-4 mb-4">
+                <label>Password Confirmation</label>
+                <input type="password" class="form-control" placeholder="Password" required="yes" id="cpass_hmo">
+              </div>
+            </div>
+            <div style="display: none">
+              <button id="submit_btn2" type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="col-sm-10 my-1">
+            <button class="btn btn-primary w-50" onclick="clicker_func('submit_btn2')">Register</button>
+          </div>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../static/js/jquery/dist/jquery.min.js"></script>
+  <script src="../static/js/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/argon.js"></script>
+  <script src="../static/js/scripts.js"></script>
+</body>
+</html>

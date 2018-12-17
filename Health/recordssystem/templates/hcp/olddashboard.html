@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="static/HCP/assets/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/HCP/assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="static/HCP/assets/vendor/linearicons/style.css">
+	<link rel="stylesheet" href="static/HCP/assets/vendor/chartist/css/chartist-custom.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="static/HCP/assets/css/main.css">
+	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	<link rel="stylesheet" href="static/HCP/assets/css/demo.css">
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="static/HCP/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="static/HCP/assets/img/favicon.png">
+	<!-- Javascript -->
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="static/HCP/assets/vendor/jquery/jquery.min.js"></script>
+	<script src="static/HCP/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="static/HCP/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="static/HCP/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="static/HCP/assets/vendor/chartist/js/chartist.min.js"></script>
+	<script src="static/HCP/assets/scripts/klorofil-common.js"></script>
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+				<a href="#"><h1>{{current_user.hospital_name}}</h1></a>
+			</div>
+			<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+				<form method="POST" action="/hcpmain" class="navbar-form navbar-left">
+					<div class="input-group">
+						<input name="fhssid" id="myInputTextField" type="text" value="" class="form-control" placeholder="Search record">
+						<span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
+					</div>
+				</form>
+				
+		</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<br><br>
+						<li><a href="{{url_for('hcp.hcpmain')}}" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="/logout" class=""><i class="lnr lnr-code"></i> <span>logout</span></a></li>
+						
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+		<script>
+
+			/* Trigger flash modal */
+			$(document).ready(function () {
+				var messages = "{{ get_flashed_messages() }}";
+
+				if (typeof messages != 'undefined' && messages != '[]') {
+					$("#myModal").modal();
+				};
+			});
+		</script>
+		<!-- MAIN -->
+
+		<div id="wrapper">
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+		
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">FHSS PROMPT</h4>
+						</div>
+						<div class="modal-body">
+							{% with messages = get_flashed_messages() %}
+							{% if messages %}
+							<ul class=flashes>
+								{% for message in messages %}
+								<li>{{ message }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+							{% endwith %}
+							{% if user==None %}
+								<div></div>
+							{% else %}
+
+								<form class="form-auth-small" method="POST" action="{{url_for('hcp.eprocess',id=user.id)}}">
+									<div class="form-group">
+										<label for="signup-hospitalname" class="control-label sr-only">One Time Password Verification</label>
+										<input type="text" name="otp" class="form-control" id="signup-hospitalname" placeholder="Please Enter OTP">
+									</div>
+								</form>
+							{% endif %}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+		
+				</div>
+			</div>
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<div class="container-fluid">
+						<h3 class="page-title">Tables</h3>
+						<div class="row">
+							<div>
+								{% if user == None %}
+								 <label>Sorry no query results available</label>
+								 {% else %}
+								<!-- BASIC TABLE -->
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">Basic Table</h3>
+									</div>
+									<div class="panel-body">
+										<table  id="myTable" class="table">
+							
+											<thead>
+												<tr>
+													<th>FHSS ID</th>
+													<th>First Name</th>
+													<th>Last Name</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>{{user.fhss}}</td>
+													<td>{{user.first_name}}</td>
+													<td>{{user.last_name}}</td>
+													<td><div><a href="{{url_for('hcp.eprofile',id=user.id)}}" class="btn btn-primary">View</a></div></td>							
+											</tbody>
+										
+										</table>
+									</div>
+								</div>
+								{% endif %}
+								<!-- END BASIC TABLE -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+	
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2018 <a href="https://www.themeineed.com" target="_blank">360 Cloud Solutuin</a>. All Rights Reserved.</p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="static/HCP/assets/vendor/jquery/jquery.min.js"></script>
+	<script src="static/HCP/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="static/HCP/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="static/HCP/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="static/HCP/assets/vendor/chartist/js/chartist.min.js"></script>
+	<script src="static/HCP/assets/scripts/klorofil-common.js"></script>
+	
+</body>
+
+</html>

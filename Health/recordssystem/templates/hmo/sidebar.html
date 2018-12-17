@@ -1,0 +1,30 @@
+<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+                    
+					<ul class="nav">
+                    
+                        {% if current_user.hcp_role == True %}
+                        
+                            <li><a href="/hmain" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="/logout" class=""><i class="lnr lnr-code"></i> <span>Logout</span></a></li>
+                        {% elif current_user.hmo_role == True %}
+                            <li><a href="/hmain" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="/hmain" class=""><i class="lnr lnr-chart-bars"></i> <span>View All HCP</span></a></li>
+                            <li><a href="/logout" class=""><i class="lnr lnr-chart-bars"></i> <span>Logout</span></a></li>
+                        {% elif current_user.fhss_role == True %}
+                                <li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                                <li><a href="#exampleModal" data-toggle="exampleModal" data-target="#exampleModal"><i class="lnr lnr-chart-bars"></i>
+                                        <span>HMO</span></a></li>
+                                <li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>HCP</span></a></li>
+                                <li><a href="panels.html" class=""><i class="lnr lnr-chart-bars"></i> <span>ENROLLEE</span></a></li>
+                        {% endif %}
+                                
+
+					</ul>
+				</nav>
+			</div>
+        </div>
+        
+
+        

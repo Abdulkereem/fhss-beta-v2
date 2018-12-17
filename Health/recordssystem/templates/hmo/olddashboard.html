@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	{% include './hmo/links.html' %}
+
+</head>
+
+
+<body>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- NAVBAR -->
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="brand">
+					<a href="#">
+						<img style="width:100px; height:50px;" src="{{url_for('static',filename='HCP/assets/img/logo-dark.png')}}" alt="">
+					</a>
+				</div>
+				<div class="container-fluid">
+					<div class="navbar-btn">
+						<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+					</div>
+					
+			
+			</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+					<br><br>
+						<li><a href="{{url_for('hmos.main')}}"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="{{url_for('hmos.claim')}}" ><i class="lnr lnr-linearicons"></i> <span>Claim payments</span></a></li>
+						<li><a href="{{url_for('hmos.view_claims')}}"><i class="lnr lnr-linearicons"></i> <span>View Claim payments</span></a></li>
+
+						<li><a href="/logout" class=""><i class="lnr lnr-code"></i> <span>logout</span></a></li>
+		
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+		<!-- END LEFT SIDEBAR -->
+		<script>
+
+			/* Trigger flash modal */
+			$(document).ready(function () {
+				var messages = "{{ get_flashed_messages() }}";
+
+				if (typeof messages != 'undefined' && messages != '[]') {
+					$("#myModal").modal();
+				};
+			});
+		</script>
+		<!-- MAIN -->
+
+		<div id="wrapper">
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+		
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Modal Header</h4>
+						</div>
+						<div class="modal-body">
+							{% with messages = get_flashed_messages() %}
+							{% if messages %}
+							<ul class=flashes>
+								{% for message in messages %}
+								<li>{{ message }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+							{% endwith %}
+							<form class="form-auth-small" method="POST" action="">
+								<div class="form-group">
+									<label for="signup-hospitalname" class="control-label sr-only">One Time Password Verification</label>
+									<input type="text" name="otp" class="form-control" id="signup-hospitalname" placeholder="Please Enter OTP">
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+		
+				</div>
+			</div>
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<div class="container-fluid">
+						<h3 class="page-title">Tables</h3>
+						<div class="row">
+							<div>
+								<!-- BASIC TABLE -->
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">Basic Table</h3>
+									</div>
+									<div class="panel-body">
+
+										<table  id="myTable" class="table">
+							
+											<thead>
+												<tr>
+													<th>HOSPTAL NAME</th>
+													<th>Meical Registration Number</th>
+													<th>Tax id</th>
+													<th>RC Number</th>
+													<th>Account Status</th>
+													<th>View</th>
+												</tr>
+											</thead>
+											{% for users in user %}
+												{% if users.hospital_name == None %}
+													<i></i>
+												{% else %}
+
+											<tbody>
+												<tr>
+													<td>{{users.hospital_name}}</td>
+													<td>{{users.medical_regno}}</td>
+													<td>{{users.tax_id}}</td>
+													<td>{{users.rc_number}}</td>
+														{% if users.block==True %}
+															<td style="color:red;">suspended</td>
+														{%  else %}
+															<td style="color:blue;">Active</td>
+														{% endif %}
+													<td>
+													<div class="text-center"><a href="{{url_for('hmos.hprofile',id=users.id)}}" class="btn btn-primary">View Profile</a></div>
+
+													</td>
+
+											</tbody>
+												{% endif %}
+											{% endfor %}
+										</table>
+										
+									</div>
+								</div>
+							
+								<!-- END BASIC TABLE -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+	
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script src="static/HCP/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="static/HCP/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="static/HCP/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="static/HCP/assets/vendor/chartist/js/chartist.min.js"></script>
+	<script src="static/HCP/assets/scripts/klorofil-common.js"></script>
+	
+</body>
+
+</html>
